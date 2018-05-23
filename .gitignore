@@ -1,0 +1,10 @@
+/node_modules/**
+/public/storage
+/storage/**
+/vendor/**
+yarn-error.log
+.env
+.env.example
+.editorconfig
+.gitattributes
+.vscode/**
