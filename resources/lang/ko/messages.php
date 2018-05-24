@@ -41,7 +41,7 @@ return [
     ],
 
     'contact' => [
-        'heading'               => '문의하기',
+        'heading'               => '문 의 하 기',
         'subheading'            => "아래의 입력 폼을 작성하여 보내주시면 친절히 답변하여 드리겠습니다.",
         'fullname'              => '성함',
         'email'                 => '이메일',

@@ -48,21 +48,19 @@
         </div>
     </div>
     <nav id="footerNav" class="navbar navbar-expand-lg navbar-dark p-0">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#footerResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
         <div class="container-fluid">
+            <h4 class="ml-3">@lang('messages.menu.brand')</h4>
+            <button class="navbar-toggler navbar-toggler-right mr-3" type="button" data-toggle="collapse" data-target="#footerResponsive" aria-controls="footerResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="footerResponsive">
-                <div class="col-md-2 col-sm-7">
-                    <h4 class="mr-5">@lang('messages.menu.brand')</h4>
-                </div>
-                <div class="col-md-2 col-sm-5 text-center">
+                <div class="col-md-4 col-sm-6 text-center">
                     <a class="social mr-3" href="https://www.facebook.com/ottawakorean/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a class="social mr-3" href="javascript:void(0)" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a class="social" href="javascript:void(0)" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="col-md-4 col-sm-4 text-center">
+                <div class="col-md-4 col-sm-6 text-center">
                     <a class="mr-2" href="javascript:void(0)">@lang('messages.menu.policy')</a>|<a class="ml-2" href="javascript:void(0)">@lang('messages.menu.privacy')</a>
                 </div>
-                <div class="col-md-4 col-sm-8 text-right">
+                <div class="col-md-4 col-sm-6 text-right">
                     {{-- Reference of Copyright Notice: https://webmasters.stackexchange.com/questions/76905/how-should-copyright-notices-be-formatted-on-websites --}}
                     <span>@lang('messages.menu.copyright')</span>
                 </div>

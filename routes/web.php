@@ -34,6 +34,6 @@ Route::get('/js/lang.js', function () {
 Route::get('/', function () { return view('index'); })->name('/');
 
 // Contact Us 
-Route::post('contact-us', 'CommonController@contactUs')->name('contact.us'); 
+Route::post('contact', 'CommonController@contactUs')->name('contact'); 
 // Get menu
 Route::get('getmenu', 'CommonController@getMenu')->name('getmenu'); 
