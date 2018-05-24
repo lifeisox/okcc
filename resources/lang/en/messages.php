@@ -26,7 +26,10 @@ return [
         // submenu of discipline
         // submenu of mission
         // submenu of koinonia
-
+        // footer
+        'policy'                => 'Terms and Conditions',
+        'privacy'               => 'Privacy',
+        'copyright'             => 'Copyright &copy; 2018 Ottawa Korean Community Church',
     ],
 
     'intro' => [

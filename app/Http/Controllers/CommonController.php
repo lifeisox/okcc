@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Mail;
 use Config;
+use Log;
 
 class CommonController extends Controller
 {
@@ -20,10 +21,13 @@ class CommonController extends Controller
             return response()->json([ 'error' => $validator->errors()->all() ], Config::get('app.http.validation'));
         } else {
             try {
-                Mail::send( 'contact', [ 'msg' => $request->content ], function($mail) use($request) {
-                    $mail->from( $request->email, $request->full_name );
-                    $mail->to( env('MAIL_FROM_ADDRESS', 'it.help@okcc.ca'), env('MAIL_FROM_NAME', 'OCO Admin') );
-                    $mail->subject( 'Contact Message' );
+                Log::debug('Name: '.$request->get('fullname').' Email: '.$request->get('email').' Phone: '.$request->get('phone').' Message: '.$request->get('content'));
+                // Ultimate Guide on Sending Email in Laravel
+                // https://scotch.io/tutorials/ultimate-guide-on-sending-email-in-laravel
+                Mail::send( 'contact', [ 'phone' => $request->get('phone'), 'contentMessage' => $request->get('content') ], function($mail) use($request) {
+                    $mail->from( $request->get('email'), $request->get('fullname') );
+                    $mail->to( env('MAIL_FROM_ADDRESS', 'it.help@okcc.ca'), env('MAIL_FROM_NAME', 'OKCC Admin') );
+                    $mail->subject( 'Contact Message from OKCC Home' );
                 });
                 return response()->json([ 'message' => 'Thank you for your message.' ], Config::get('app.http.success'));
             } catch (Exception $e) {
@@ -34,7 +38,7 @@ class CommonController extends Controller
 
     public function getMenu() {
         $menu = [
-            [ 'title' => trans('messages.menu.welcome'), 'url' => route('/'), 'anchor' => '#top', 
+            [ 'title' => trans('messages.menu.welcome'), 'url' => '', 'anchor' => '#', 
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#services' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#portfolio' ],
@@ -44,7 +48,7 @@ class CommonController extends Controller
                     [ 'title' => trans('messages.menu.contact'), 'url' => route('/'), 'anchor' => '#contact' ],
                 ]
             ],
-            [ 'title' => trans('messages.menu.intro'), 'url' => route('/'), 'anchor' => '#top', 
+            [ 'title' => trans('messages.menu.intro'), 'url' => '', 'anchor' => '#',  
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#contact' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#portfolio' ],
@@ -53,7 +57,7 @@ class CommonController extends Controller
                     [ 'title' => trans('messages.menu.school'), 'url' => route('/'), 'anchor' => '#school' ]
                 ]
             ],
-            [ 'title' => trans('messages.menu.discipline'), 'url' => route('/'), 'anchor' => '#discipline', 
+            [ 'title' => trans('messages.menu.discipline'), 'url' => '', 'anchor' => '#',  
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#newcomer' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#event' ],
@@ -62,7 +66,7 @@ class CommonController extends Controller
                     [ 'title' => trans('messages.menu.school'), 'url' => route('/'), 'anchor' => '#school' ]
                 ]
             ],
-            [ 'title' => trans('messages.menu.mission'), 'url' => route('/'), 'anchor' => '#mission', 
+            [ 'title' => trans('messages.menu.mission'), 'url' => '', 'anchor' => '#', 
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#newcomer' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#event' ],
@@ -71,7 +75,7 @@ class CommonController extends Controller
                     [ 'title' => trans('messages.menu.school'), 'url' => route('/'), 'anchor' => '#school' ]
                 ]
             ],
-            [ 'title' => trans('messages.menu.koinonia'), 'url' => route('/'), 'anchor' => '#koinonia', 
+            [ 'title' => trans('messages.menu.koinonia'), 'url' => '', 'anchor' => '#',  
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#newcomer' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#event' ],

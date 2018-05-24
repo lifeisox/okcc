@@ -168,7 +168,7 @@ h4, h5, h6 {
 
 /* Navigation Menu */
 #mainNav { background-color: #050505; }
-#mainNav .navbar-toggler {
+#mainNav .navbar-toggler, #footerNav .navbar-toggler {
     right: 0;
     padding: 3px 5px;
     color: white;
@@ -288,39 +288,99 @@ header.intro .intro-text .intro-heading {
     }
 }
 
-
-
-
-
-
-
-
-
-
-section {
-    padding: 100px 0;
+/* Footer */
+footer { padding: 25px 0 0 0; }
+footer .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color:#101010;
 }
+footer ul { 
+    list-style: none; /* Remove HTML bullets */ 
+    padding: 0 3px 25px 0;
+}
+footer ul > li > a {
+    font-size: 1rem;
+    color:#101010;
+}
+footer ul > li > a:hover {
+    text-decoration: none;
+    color:#2b65cf;
+}
+footer .container-fluid {
+    padding: 20px 50px;
+    background-color:#101010;
+    color:#909090;
+}
+footer a { color:#a0a0a0; }
+footer a:hover { color:#4d7bfa; text-decoration: none; }
+footer a.social { font-size: 1.25rem; }
 
+/* Section Base */
+section { padding: 100px 0; }
 section h2.section-heading {
     font-size: 40px;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    color:wheat;
 }
-
 section h3.section-subheading {
     font-size: 16px;
     font-weight: 400;
-    font-style: italic;
-    margin-bottom: 75px;
-    text-transform: none;
-    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-bottom: 65px;
+    color:rgb(250, 198, 101);
+    font-family: 'Montserrat', 'Nanum Myeongjo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
 @media (min-width: 768px) {
     section {
         padding: 150px 0;
     }
 }
+
+/* Contact Us */
+section#contact {
+    background-color: #212529;
+    background-image: url("/images/map-image.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+section#contact .form-group { margin-bottom: 25px; }
+section#contact .form-group input,
+section#contact .form-group textarea { 
+    padding: 20px;
+    font-size: 1rem;
+}
+section#contact .form-group input.form-control { height: auto; }
+section#contact .form-group textarea.form-control { height: 248px; }
+section#contact .form-control:focus {
+    border-color: #fed136;
+    box-shadow: none;
+}
+section#contact ::-webkit-input-placeholder {
+    color: #ced4da;
+    font-family: 'Montserrat', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+section#contact :-moz-placeholder {
+    color: #ced4da;
+    /* Firefox 18- */
+    font-family: 'Montserrat', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+section#contact ::-moz-placeholder {
+    color: #ced4da;
+    /* Firefox 19+ */
+    font-family: 'Montserrat', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+section#contact :-ms-input-placeholder {
+    color: #ced4da;
+    font-family: 'Montserrat', 'Nanum Gothic', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+
+
+
+
+
 
 ::-moz-selection {
     background: #fed136;
@@ -712,105 +772,5 @@ img::-moz-selection {
     margin-top: 0;
 }
 
-section#contact {
-    background-color: #212529;
-    background-image: url("../img/map-image.png");
-    background-repeat: no-repeat;
-    background-position: center;
-}
 
-section#contact .section-heading {
-    color: #fff;
-}
 
-section#contact .form-group {
-    margin-bottom: 25px;
-}
-
-section#contact .form-group input,
-section#contact .form-group textarea {
-    padding: 20px;
-}
-
-section#contact .form-group input.form-control {
-    height: auto;
-}
-
-section#contact .form-group textarea.form-control {
-    height: 248px;
-}
-
-section#contact .form-control:focus {
-    border-color: #fed136;
-    box-shadow: none;
-}
-
-section#contact ::-webkit-input-placeholder {
-    font-weight: 700;
-    color: #ced4da;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-section#contact :-moz-placeholder {
-    font-weight: 700;
-    color: #ced4da;
-    /* Firefox 18- */
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-section#contact ::-moz-placeholder {
-    font-weight: 700;
-    color: #ced4da;
-    /* Firefox 19+ */
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-section#contact :-ms-input-placeholder {
-    font-weight: 700;
-    color: #ced4da;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-footer {
-    padding: 25px 0;
-    text-align: center;
-}
-
-footer span.copyright {
-    font-size: 90%;
-    line-height: 40px;
-    text-transform: none;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-footer ul.quicklinks {
-    font-size: 90%;
-    line-height: 40px;
-    margin-bottom: 0;
-    text-transform: none;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-ul.social-buttons {
-    margin-bottom: 0;
-}
-
-ul.social-buttons li a {
-    font-size: 20px;
-    line-height: 40px;
-    display: block;
-    width: 40px;
-    height: 40px;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    color: white;
-    border-radius: 100%;
-    outline: none;
-    background-color: #212529;
-}
-
-ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-    background-color: #fed136;
-}
-  
