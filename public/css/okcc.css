@@ -771,46 +771,29 @@ section#contact :-ms-input-placeholder {
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-footer {
-    padding: 25px 0;
-    text-align: center;
+footer { padding: 25px 0 0 0; }
+footer .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color:#101010;
 }
-
-footer span.copyright {
-    font-size: 90%;
-    line-height: 40px;
-    text-transform: none;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+footer ul { 
+    list-style: none; /* Remove HTML bullets */ 
+    padding: 0 3px 25px 0;
 }
-
-footer ul.quicklinks {
-    font-size: 90%;
-    line-height: 40px;
-    margin-bottom: 0;
-    text-transform: none;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+footer ul > li > a {
+    font-size: 1rem;
+    color:#101010;
 }
-
-ul.social-buttons {
-    margin-bottom: 0;
+footer ul > li > a:hover {
+    text-decoration: none;
+    color:#2b65cf;
 }
-
-ul.social-buttons li a {
-    font-size: 20px;
-    line-height: 40px;
-    display: block;
-    width: 40px;
-    height: 40px;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    color: white;
-    border-radius: 100%;
-    outline: none;
-    background-color: #212529;
+footer .container-fluid {
+    padding: 20px 50px;
+    background-color:#101010;
+    color:#909090;
 }
-
-ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-    background-color: #fed136;
-}
-  
+footer a { color:#a0a0a0; }
+footer a:hover { color:#4d7bfa; text-decoration: none; }
+footer a.social { font-size: 1.25rem; }

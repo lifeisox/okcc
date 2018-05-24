@@ -9,6 +9,7 @@ return [
     */
 
     'menu' => [
+        // header
         'brand'                 => '오타와한인교회',
         'welcome'               => '환영합니다',
         'intro'                 => '교회안내',
@@ -27,6 +28,10 @@ return [
         // submenu of discipline
         // submenu of mission
         // submenu of koinonia
+        // footer
+        'policy'                => '서비스약관',
+        'privacy'               => '개인정보처리방침',
+        'copyright'             => 'Copyright &copy; 2018 Ottawa Korean Community Church',
     ],
 
     'intro' => [
