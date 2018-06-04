@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->unsignedInteger('privilege')->default(99)->comment('Privilege: [0] Super Admin [1] Admin [10] Member [99] Semi Member');
             $table->rememberToken();
             $table->timestamps();
         });

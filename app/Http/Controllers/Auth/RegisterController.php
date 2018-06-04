@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
+use Mail;
+use Log;
 
 class RegisterController extends Controller
 {
@@ -28,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,10 +66,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            $content = 'Name: ['.$data['name'].'], Email: ['.$data['email'].'] User is registered in OKCC Home at '.Carbon::now().'.';
+            Log::debug($content);
+            // Ultimate Guide on Sending Email in Laravel
+            // https://scotch.io/tutorials/ultimate-guide-on-sending-email-in-laravel
+            Mail::send( 'contact', [ 'phone' => 'N/A', 'contentMessage' => $content ], function($mail) use($data) {
+                $mail->from( $data['email'], $data['name'] );
+                $mail->to( env('MAIL_FROM_ADDRESS', 'it.help@okcc.ca'), env('MAIL_FROM_NAME', 'OKCC Admin') );
+                $mail->subject( 'Member Registration from OKCC Home' );
+            });
+
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'privilege' => 99,
+            ]);
+        } catch (Exception $e) {
+                return response()->json([ 'error' => $e->getMessage() ], $e->getCode());
+        }
     }
 }

@@ -54,4 +54,15 @@ return [
         'send_success'          => '이메일이 오타와한인교회 홈페이지 관리자에게 정상적으로 발송되었습니다.',
     ],
 
+    'button' => [
+        'login'                 => '로그인',
+        'register'              => '회원가입',
+        'close'                 => '닫기',
+        'forgotPassword'        => '비밀번호찾기',
+        'resetPassword'         => '비밀번호 리셋',
+        'sendResetLink'         => '비밀번호 리셋 링크 보내기',
+        'signup'                => '회원가입',
+        'logout'                => '로그아웃',
+        'home'                  => '홈으로',
+    ],
 ];

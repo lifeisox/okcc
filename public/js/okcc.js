@@ -33,8 +33,9 @@ jQuery(document).ready( function($) {
         }
     }
 
-
-
+    $("#forgotPasswordButton").click(function() {
+        alert("Click forgotPasswordButton");
+    });
 
 
 
