@@ -8,7 +8,12 @@ body {
   
 p { line-height: 1.75; }
 
-.text-primary { color: #fed136 !important; }
+.text-primary { color: #0d47a1 !important; }
+.text-secondary { color: #1C2331 !important; }
+.text-success { color: #007E33 !important; }
+.text-info { color: #9933CC !important; }
+.text-warning { color: #FF8800 !important; }
+.text-danger { color: #CC0000 !important; }
   
 h1, h2, h3 {
     font-weight: 700;
@@ -308,10 +313,12 @@ section h3.section-subheading {
     font-family: 'Montserrat', 'Nanum Myeongjo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 @media (min-width: 768px) {
-    section {
-        padding: 150px 0;
-    }
+    section { padding: 150px 0; }
+    section#location { padding: 50px 0; }
 }
+
+/* Location */
+section#location { padding: 0; }
 
 /* Contact Us */
 section#contact {
