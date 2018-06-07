@@ -10,6 +10,11 @@ use Log;
 
 class CommonController extends Controller
 {
+    /**
+     * Send a contact email for an incoming request.
+     * @param Request $request
+     * @return \Illuminate\Http\Response Set the Content-Type header to application/json, Convert the array to JSON using the PHP json_encode
+     */
     public function contactUs(Request $request) {
         $validator = Validator::make( $request->all(), [
             'fullname'          => 'required',
@@ -36,6 +41,10 @@ class CommonController extends Controller
         }
     }
 
+    /**
+     * Get top menu for the Website
+     * @return \Illuminate\Http\Response Set the Content-Type header to application/json, Convert the array to JSON using the PHP json_encode
+     */
     public function getMenu() {
         $menu = [
             [ 'title' => trans('messages.menu.welcome'), 'url' => '', 'anchor' => '#', 
@@ -87,5 +96,57 @@ class CommonController extends Controller
         ];
         $result = array( "menu" => json_decode( json_encode($menu), true ) );
         return response()->json( $result );
+    }
+
+    /**
+     * Get Admin menu (top, side) for the Website
+     * @return \Illuminate\Http\Response Set the Content-Type header to application/json, Convert the array to JSON using the PHP json_encode
+     */
+    public function getAdminMenu() {
+        $menu = array(
+            [ 'key' => 'officer', 'data' => $this->getOfficerMenu(), ],
+            [ 'key' => 'super', 'data' => $this->getSuperAdminMenu(), ],
+        );
+        $result = array( "menu" => json_decode( json_encode($menu), true ) );
+        return response()->json( $result );
+    }
+
+    /**
+     * Get Officer menu (top, side) of Admin for the Website
+     * @return \Illuminate\Http\Response Set the Content-Type header to application/json, Convert the array to JSON using the PHP json_encode
+     */
+    private function getOfficerMenu() {
+        return array([
+            'icon' => 'fa-chess-queen',
+            'text' => trans('admin.menu.officer'),
+            'route' => route('admin.officer'),
+            'isOpened' => true,
+            'roles' => ['0', '1'],
+            'sub_menu' => array(
+                [
+                    'icon' => 'fa-user-cog',
+                    'text' =>  trans('admin.menu.user'),
+                    'route' => route('admin.users.start'),
+                    'isOpened' => false,
+                    'roles' => ['0', '1'],
+                    'sub_menu' => null,
+                ],
+            ),
+        ]);
+    }
+    
+    /**
+     * Get Super Admin menu (top, side) of Admin for the Website
+     * @return \Illuminate\Http\Response Set the Content-Type header to application/json, Convert the array to JSON using the PHP json_encode
+     */
+    private function getSuperAdminMenu() {
+        return array([
+            'icon' => 'fa-chess-king',
+            'text' => trans('admin.menu.super'),
+            'route' => route('admin.super'),
+            'isOpened' => false,
+            'roles' => ['0'],
+            'sub_menu' => null,
+        ]);
     }
 }

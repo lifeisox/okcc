@@ -62,10 +62,17 @@
                 window.location.href = '{{ url('/') }}';
             }); 
 
+            // Get roles for current user
+            var USER_ROLES = '';
+            var USER_ID = '';
+            @auth
+                USER_ID = "{{ Auth::user()->id }}";
+                USER_ROLES = "{{ Auth::user()->privilege }}";
+            @endauth
             jQuery.noConflict(); // Reverts '$' variable back to other JS libraries
             jQuery(document).ready( function($) { 
 
-                axios({ method: 'get', url: '{!! route('getmenu') !!}' })
+                axios({ method: 'GET', url: '{!! route('getmenu') !!}' })
                 .then(function (response) {
                     const $top = $("#topMenuArea");
                     $.each( response.data.menu, function ( index, data ) {
@@ -75,20 +82,22 @@
                     var html;
                     @guest 
                         html = `<li class="nav-item nav-link"><a class="btn btn-outline-light" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#loginModal">{{ trans('messages.menu.signin') }}</a></li>`;
-                        @else
+                    @else
                         html = `<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i class="fa fa-fw fa-user mr-1"></i>{{ Auth::user()->name }}
+                                <i class="fas fa-fw fa-user mr-1"></i>{{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>{{ trans('messages.button.logout') }}
-                                </a>
-                                <a href="/" class="dropdown-item"><i class="fas fa-home mr-2"></i>{{ trans('messages.button.home') }}</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                                    <i class="fas fa-sign-out-alt fa-fw fa-lg mr-2"></i>{{ trans('messages.button.logout') }}
+                                </a>`;
+                        if (typeof USER_ROLES !== 'undefined' !== undefined && (USER_ROLES === '0' || USER_ROLES === '1')) {
+                            html += `<a href="/admin" class="dropdown-item"><i class="fas fa-key fa-fw fa-lg mr-2"></i>{{ trans('messages.button.admin') }}</a>`;
+                        }
+                        html += `<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                             </div>
-                        </li>`
-                        @endguest
+                        </li>`;
+                    @endguest
                     $top.append( html );
 
                     // Closes responsive menu when a scroll trigger link is clicked

@@ -20,3 +20,11 @@ function axiosErrorMessage( error ) {
 function sendSuccessMessage() {
     toastr.success( i18n.messages.errors.send_success ).attr('style', TOASTR_STYLE);
 }
+
+function saveSuccessMessage() {
+    toastr.success( i18n.messages.errors.save_success ).attr('style', TOASTR_STYLE);
+}
+
+function deleteSuccessMessage() {
+    toastr.success( i18n.messages.errors.delete_success ).attr('style', TOASTR_STYLE);
+}

@@ -13,7 +13,11 @@
 
 Auth::routes();
 
-// Localization
+/*
+|--------------------------------------------------------------------------
+| Localization Routes of JavaScript
+|--------------------------------------------------------------------------
+*/
 Route::get('/js/lang.js', function () {
     $strings = Cache::rememberForever('lang.js', function () {
         $lang = config('app.locale');
@@ -30,10 +34,36 @@ Route::get('/js/lang.js', function () {
     exit();
 })->name('assets.lang');
 
-// Home
-Route::get('/', function () { return view('index'); })->name('/');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () { return view('index'); })->name('/'); // Home
 
-// Contact Us 
-Route::post('contact', 'CommonController@contactUs')->name('contact'); 
-// Get menu
-Route::get('getmenu', 'CommonController@getMenu')->name('getmenu'); 
+/*
+|--------------------------------------------------------------------------
+| Common Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('getmenu', 'CommonController@getMenu')->name('getmenu'); // Get Menu
+Route::get('admin/getmenu', 'CommonController@getAdminMenu')->name('getadminmenu'); // Get Admin Menu
+Route::post('contact', 'CommonController@contactUs')->name('contact'); // Contact Us: Send contact email
+
+/*
+|--------------------------------------------------------------------------
+| Admin Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('admin', 'Admin\AdminPagesController@index')->name('admin'); // Index page
+Route::get('admin/officer', 'Admin\AdminPagesController@officer')->name('admin.officer'); // Officer landing page
+Route::get('admin/super', 'Admin\AdminPagesController@super')->name('admin.super'); // Super Admin landing page
+Route::get('admin/officer/usersStart', 'Admin\AdminPagesController@usersStart')->name('admin.users.start'); // Super Admin landing page
+
+/*
+|--------------------------------------------------------------------------
+| Admin Subpages' Routes
+|--------------------------------------------------------------------------
+*/
+// GET/PUT/DELETE users table 
+Route::resource('admin/officer/users', 'Admin\UsersController', [ 'except' => [ 'store', 'create', 'edit', 'show' ], 'as' => 'admin' ] );
