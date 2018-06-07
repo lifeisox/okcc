@@ -28,9 +28,13 @@
         @yield('styles')
     </head>
     <body id="top">
+
         @include('layouts.header')
         @yield('content')
         @include('layouts.footer')
+        @include('auth.login')
+        @include('auth.register')
+        @include('auth.passwords.email')
 
         {{-- jQuery Official Site: https://jquery.com/ CDN: https://code.jquery.com/jquery/ --}}
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -38,8 +42,6 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="  crossorigin="anonymous"></script>
         {{-- jQuery Easing: A jQuery plugin from GSGD to give advanced easing options http://gsgd.co.uk/sandbox/jquery/easing/ --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        {{-- jQuery idle timer --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-idletimer/1.0.0/idle-timer.min.js"></script> --}}
         {{-- toastr is a Javascript library for non-blocking notifications. jQuery is required. https://github.com/CodeSeven/toastr --}}
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         {{-- CSRF Token --}}
@@ -50,25 +52,27 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/messages.js') }}"></script>
         <script src="{{ asset('js/okcc.js') }}"></script>
-
+        {{-- jQuery idle timer --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-idletimer/1.0.0/idle-timer.min.js"></script>
+        
         <script>
             // relocate home if session timeout
-            // $.idleTimer( '{{ config('session.lifetime') }}' * 60 * 1000 );
-            // $( document ).bind( "idle.idleTimer", function(event, elem, obj){
-            //     window.location.href = '{{ url('/') }}';
-            // }); 
-            // Get roles for current user
-            // @auth
-            //     var roles = "{{ Auth::user()->roles() }}";
-            //     var USER_ROLES = JSON.parse(roles.replace(/&quot;/g, '"'));
-            // @else
-            //     var USER_ROLES = '';
-            // @endauth
+            $.idleTimer( '{{ config('session.lifetime') }}' * 60 * 1000 );
+            $( document ).bind( "idle.idleTimer", function(event, elem, obj){
+                window.location.href = '{{ url('/') }}';
+            }); 
 
+            // Get roles for current user
+            var USER_ROLES = '';
+            var USER_ID = '';
+            @auth
+                USER_ID = "{{ Auth::user()->id }}";
+                USER_ROLES = "{{ Auth::user()->privilege }}";
+            @endauth
             jQuery.noConflict(); // Reverts '$' variable back to other JS libraries
             jQuery(document).ready( function($) { 
 
-                axios({ method: 'get', url: '{!! route('getmenu') !!}' })
+                axios({ method: 'GET', url: '{!! route('getmenu') !!}' })
                 .then(function (response) {
                     const $top = $("#topMenuArea");
                     $.each( response.data.menu, function ( index, data ) {
@@ -77,21 +81,23 @@
                     $top.append( $("<span>", { 'class': 'mr-5' }) );
                     var html;
                     @guest 
-                        html = `<li class="nav-item nav-link"><a class="btn btn-outline-light" href="#" role="button">{{ trans('messages.menu.signin') }}</a></li>`;
-                        @else
+                        html = `<li class="nav-item nav-link"><a class="btn btn-outline-light" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#loginModal">{{ trans('messages.menu.signin') }}</a></li>`;
+                    @else
                         html = `<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i class="fa fa-fw fa-user mr-1"></i>{{ Auth::user()->name }}
+                            <a class="nav-link dropdown-toggle " href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                <i class="fas fa-fw fa-user mr-1"></i>{{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-fw fa-sign-out fa-lg mr-1"></i>{{ trans('messages.adm_button.logout') }}
-                                </a>
-                                <a href="/" class="dropdown-item"><i class="fa fa-fw fa-cog fa-lg mr-1"></i>{{ trans('messages.adm_layout.goback_home') }}</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                                    <i class="fas fa-sign-out-alt fa-fw fa-lg mr-2"></i>{{ trans('messages.button.logout') }}
+                                </a>`;
+                        if (typeof USER_ROLES !== 'undefined' !== undefined && (USER_ROLES === '0' || USER_ROLES === '1')) {
+                            html += `<a href="/admin" class="dropdown-item"><i class="fas fa-key fa-fw fa-lg mr-2"></i>{{ trans('messages.button.admin') }}</a>`;
+                        }
+                        html += `<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                             </div>
-                        </li>`
-                        @endguest
+                        </li>`;
+                    @endguest
                     $top.append( html );
 
                     // Closes responsive menu when a scroll trigger link is clicked
@@ -139,7 +145,6 @@
 
             // Create Top Menu
             const getTopMenuItem = function ( data ) {
-                // if(typeof USER_ROLES !== 'undefined' !== undefined && USER_ROLES.includes(itemData.roles) === true) {
                 const item = $("<li class='nav-item dropdown'>").append(
                     $("<a>", {
                         'id': 'navbarDropdownMenuLink',
@@ -173,9 +178,6 @@
                     });
                 }
                 return item;
-            // } else {
-            //     return;
-            // }
             };
 
         </script>
