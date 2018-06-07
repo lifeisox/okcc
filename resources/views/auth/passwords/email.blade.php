@@ -16,7 +16,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-md-3 col-form-label text-md-right">@lang('passwords.emailLabel')</label>
                     <div class="col-md-9">
-                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
                         @if ($errors->has('email'))
                             <span class="invalid-feedback">
                                 <strong>{{ $errors->first('email') }}</strong>

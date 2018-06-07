@@ -83,5 +83,5 @@
     }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3Mh2D9ibHxw9ijjv4rtIohVVK7NnmxG8&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('google.api_key', 'Application Name') }}&callback=initMap" async defer></script>
 @endsection
