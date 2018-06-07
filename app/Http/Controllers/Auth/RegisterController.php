@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Http\Services\SystemLog;
+use App\Services\SystemLog;
 use Carbon\Carbon;
 use Config;
 use Mail;
