@@ -50,6 +50,12 @@ return [
         'sendbutton'            => '메시지 보내기',
     ],
 
+    'location' => [
+        'title'                 => '오타와한인교회',
+        'main'                  => "It's Nice To Meet You",
+        'goto-newcomer'         => 'Tell Me More',
+    ],
+
     'errors' => [
         'send_success'          => '이메일이 오타와한인교회 홈페이지 관리자에게 정상적으로 발송되었습니다.',
         'save_success'          => '자료가 정상적으로 저장되었습니다.',

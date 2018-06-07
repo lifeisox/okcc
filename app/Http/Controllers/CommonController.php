@@ -51,7 +51,7 @@ class CommonController extends Controller
                 'submenus' => [
                     [ 'title' => trans('messages.menu.newcomer'), 'url' => route('/'), 'anchor' => '#services' ],
                     [ 'title' => trans('messages.menu.event'), 'url' => route('/'), 'anchor' => '#portfolio' ],
-                    [ 'title' => trans('messages.menu.location'), 'url' => route('/'), 'anchor' => '#about' ],
+                    [ 'title' => trans('messages.menu.location'), 'url' => route('/'), 'anchor' => '#location' ],
                     [ 'title' => trans('messages.menu.facility'), 'url' => route('/'), 'anchor' => '#team' ],
                     [ 'title' => trans('messages.menu.school'), 'url' => route('/'), 'anchor' => '#client' ],
                     [ 'title' => trans('messages.menu.contact'), 'url' => route('/'), 'anchor' => '#contact' ],
