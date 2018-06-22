@@ -14,8 +14,8 @@
         {{-- Favicon --}}
         <link rel="icon" href="{{ asset('images/favicon.ico') }}">
 
-        {{-- Font Awesome 5.0.13 --}}
-        <link href="{{ asset('css/fontawesome/css/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css">
+        {{-- Font Awesome 5.1.0 --}}
+        <link href="{{ asset('css/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
         {{-- Korean Fonts : <TODO>나중에 사용해보고 적절한 폰트 2-3가지만 고를 예정임</TODO> --}}
         <link href="https://fonts.googleapis.com/css?family=Gaegu:300,400,700|Gamja+Flower|Nanum+Gothic:400,800|Nanum+Myeongjo:400,800|Roboto:400,500,700,900|Montserrat:400,700|Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type='text/css'>
         <link href='https://cdn.rawgit.com/young-ha/webfont-archive/master/css/Youth.css' rel='stylesheet' type='text/css'>
