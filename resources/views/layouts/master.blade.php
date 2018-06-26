@@ -14,8 +14,8 @@
         {{-- Favicon --}}
         <link rel="icon" href="{{ asset('images/favicon.ico') }}">
 
-        {{-- Font Awesome 5.0.13 --}}
-        <link href="{{ asset('css/fontawesome/css/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css">
+        {{-- Font Awesome 5.1.0 --}}
+        <link href="{{ asset('css/fontawesome/css/all.css') }}" rel="stylesheet" type="text/css">
         {{-- Korean Fonts : <TODO>나중에 사용해보고 적절한 폰트 2-3가지만 고를 예정임</TODO> --}}
         <link href="https://fonts.googleapis.com/css?family=Gaegu:300,400,700|Gamja+Flower|Nanum+Gothic:400,800|Nanum+Myeongjo:400,800|Roboto:400,500,700,900|Montserrat:400,700|Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type='text/css'>
         <link href='https://cdn.rawgit.com/young-ha/webfont-archive/master/css/Youth.css' rel='stylesheet' type='text/css'>
@@ -145,39 +145,43 @@
 
             // Create Top Menu
             const getTopMenuItem = function ( data ) {
-                const item = $("<li class='nav-item dropdown'>").append(
-                    $("<a>", {
-                        'id': 'navbarDropdownMenuLink',
-                        'class': 'nav-link dropdown-toggle',
-                        'data-toggle': 'dropdown',
-                        'aria-haspopup': 'true',
-                        'aria-expanded': 'false',
-                        'href': data.route ? data.route + data.anchor : data.anchor,
-                        'html': data.title,
-                    })
-                );
-                if ( data.submenus ) {
-                    item.append(
-                        $("<div>", {
-                            'class': 'dropdown-menu',
-                            'aria-labelledby': 'navbarDropdownMenuLink'
+                if (typeof USER_ROLES !== 'undefined' !== undefined && (data.roles[0] === 'ALL' || data.roles.includes(USER_ROLES) === true)) {
+                    const item = $("<li class='nav-item dropdown'>").append(
+                        $("<a>", {
+                            'id': 'navbarDropdownMenuLink',
+                            'class': 'nav-link dropdown-toggle',
+                            'data-toggle': 'dropdown',
+                            'aria-haspopup': 'true',
+                            'aria-expanded': 'false',
+                            'href': data.route ? data.route + data.anchor : data.anchor,
+                            'html': data.title,
                         })
                     );
-                    $.each( data.submenus, function ( index, list ) {
-                        // TODO: 아래와 같은 형식을 참조하여 Role을 규정한다
-                        // if(!USER_ROLES.includes(itemData.roles)) {
-                        //     item.hide();
-                        // }
-                        item.find('div').append(
-                            $("<a>", {
-                                'class': 'dropdown-item js-scroll-trigger',
-                                'href': list.route ? list.route + list.anchor : list.anchor,
-                                'html': list.title
+                    if ( data.submenus ) {
+                        item.append(
+                            $("<div>", {
+                                'class': 'dropdown-menu',
+                                'aria-labelledby': 'navbarDropdownMenuLink'
                             })
                         );
-                    });
+                        $.each( data.submenus, function ( index, list ) {
+                            // TODO: 아래와 같은 형식을 참조하여 Role을 규정한다
+                            // if(!USER_ROLES.includes(itemData.roles)) {
+                            //     item.hide();
+                            // }
+                            if (typeof USER_ROLES !== 'undefined' !== undefined && (list.roles[0] === 'ALL' || list.roles.includes(USER_ROLES) === true)) {
+                                item.find('div').append(
+                                    $("<a>", {
+                                        'class': 'dropdown-item js-scroll-trigger',
+                                        'href': list.route ? list.route + list.anchor : list.anchor,
+                                        'html': list.title
+                                    })
+                                );
+                            }
+                        });
+                    }
+                    return item;
                 }
-                return item;
             };
 
         </script>

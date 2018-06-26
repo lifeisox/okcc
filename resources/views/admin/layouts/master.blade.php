@@ -57,11 +57,11 @@
             }); 
 
             // Get roles for current user
+            var USER_ROLES = '';
+            var USER_ID = '';
             @auth
-                var USER_ID = "{{ Auth::user()->id }}";
-                var USER_ROLES = "{{ Auth::user()->privilege }}";
-            @else
-                var USER_ROLES = '';
+                USER_ID = "{{ Auth::user()->id }}";
+                USER_ROLES = "{{ Auth::user()->privilege }}";
             @endauth
 
             // Check if URL includes menu string

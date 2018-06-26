@@ -12,7 +12,10 @@
 @section('content')
 
 @include('includes.intro')
+@include('includes.newcomer')
+@include('includes.event')
 @include('includes.location')
+@include('includes.parking')
 @include('includes.contact')
 
 @endsection
